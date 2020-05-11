@@ -123,6 +123,7 @@ $("ol").on("click", ".star i", function() {
   $(this).parentsUntil("ol").removeClass("bonus");
   // let time = event.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.textContent;
   let time = event.target.parentNode.parentNode.querySelector('.time').textContent;
+  console.log(time);
   var verbs = Store.getVerbs();
   verbs.forEach(function(verb, index) {
     if(verb.time === time) {
@@ -157,7 +158,8 @@ $("ol").on("click", ".reward i", function() {
 
 $(".fa-plus").click(function() {
 	$("input[type='text']").fadeToggle();
-	$("input[type='time']").fadeToggle();
+  $("input[type='time']").fadeToggle();
+  $("button[type='submit']").fadeToggle();
 });
 
 //functions
