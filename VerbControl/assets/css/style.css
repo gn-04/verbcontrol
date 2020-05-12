@@ -24,7 +24,8 @@ h1 {
 
 #submit {
 	background-color: black;
-	border: 2px solid #00bf8f;
+	border: 3px solid #00bf8f;
+	border-radius: 10px;
 	width: 100%;
 	color: #00bf8f;
 	height: 50px;
@@ -38,9 +39,6 @@ h1 {
 }
 
 
-
-
-
 ol {
 	list-style: none;
 	margin: 0;
@@ -51,25 +49,54 @@ ol {
 li {
 	background-color: white;
 	line-height: 6vh;
-	color: #666;
+	color: black;
 	height: 6vh;
 	min-height: 50px;
 	font-size: 20px;
+	font-weight: 500;
 	border: 1px solid black;
-	
 }
 
-.trash {
-	background-color: #d41010;
+.reveal i {
+	float: right;
+	text-align: center;
+	line-height: 5vh;
+	position: relative;
+  /* Adjust these values accordingly */
+  top: 5px;
+	left: -5px;
+	width: 40px;
+}
+
+.done i {
+	float: right;
+	text-align: center;
+	line-height: 5vh;
+	position: relative;
+  /* Adjust these values accordingly */
+  top: 5px;
+  left: -5px;
+	width: 40px;
+	/* transition: 0.2s linear;
+	opacity: 0 */
+}
+
+/* .done i:active, .reveal i:active {
+	color: #10cdee;
+} */
+
+.trash i {
+	background-color: black;
+	line-height: 6vh;
 	height: 6vh;
-	min-height: 50px;
-	margin-right: 20px;
+	min-height: 49px;
+	margin-right: 5px;
 	text-align: center;
 	color: white;
-	width: 0;
-	display: inline-block;
-	transition: 0.2s linear;
-	opacity: 0;
+	width: 40px;
+	/* transition: 0.2s linear; */
+	/* opacity: 0; */
+	border: 1px solid black;
 }
 
 
@@ -79,30 +106,42 @@ li {
 	color: #00bf8f;
 	/*color: #9a2bef;*/
 	text-align: center;
-	margin-top: 10px;
-	margin-right: 10px;
 	line-height: 5vh;
-	width: 0;
+	position: relative;
+  /* Adjust these values accordingly */
+  top: 5px;
+	left: 5px;
+	width: 40px;
+	/* width: 0;
 	transition: 0.2s linear;
-	opacity: 0;
+	opacity: 0; */
 }
 
 .star i {
 	float: right;
 	color: #871aee;
 	text-align: center;
-	margin-top: 10px;
-	margin-right: 10px;
 	line-height: 5vh;
-	width: 0;
+	position: relative;
+  /* Adjust these values accordingly */
+  top: 5px;
+	left: 5px;
+	width: 40px;
+	/* width: 0;
 	transition: 0.2s linear;
-	opacity: 0;
+	opacity: 0; */
 }
 
-li:hover .trash, li:hover .star i, li:hover .reward i {
+/* li:hover .trash, li:hover .star i, li:hover .reward i, li:hover .done i {
 	width: 40px;
 	opacity: 1.0;
+} */
+
+.initHidden {
+	display: none;
 }
+
+
 
 input {
 	font-size: 40px;
@@ -116,8 +155,7 @@ input {
 }
 
 input:focus{
-	background-color: white;
-	border: 3px solid #2980b9;
+	border: 3px solid #00bf8f;
 	outline: none;
 
 }
@@ -133,19 +171,17 @@ input:focus{
 }
 
 .critical {
-	background-color: #871aee;
+	background-color: #a155e7;
 	color: black;
 }
 
 .critical .star i {
 	/* color: #e7280f; */
 	color: black;
-	width: 70px;
-	opacity: 1.0;
 }
 
 .critical .reward i {
-	display: none;
+	/* display: none; */
 }
 
 
@@ -156,12 +192,10 @@ input:focus{
 
 .bonus .reward i {
 	color: black;
-	width: 70px;
-	opacity: 1.0;
 }
 
 .bonus .star i {
-	display: none;
+	/* display: none; */
 }
 
 #container {

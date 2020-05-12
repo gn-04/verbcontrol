@@ -33,11 +33,12 @@ class Store {
     const li = document.createElement('li');
     // Insert cols
     li.innerHTML = `
-    <span class='trash'><i class="delete fas fa-trash"></i></span><span class="time">${verb.time}</span>   <span>${verb.text}</span><span class='reward'><i class='far fa-gem'></i></span><span class='star'><i class='fas fa-dragon'></i></span>
+    <span class='trash initHidden getsToggled'><i class="delete fas fa-trash"></i></span><span class="time">${verb.time}</span> <span>${verb.text}</span><span class="reveal getsToggled"><i class="far fa-plus-square"></i></span><span class="done initHidden getsToggled"><i class="far fa-times-circle"></i></span><span class='reward initHidden getsToggled'><i class='far fa-gem'></i></span><span class='star initHidden getsToggled'><i class='fas fa-dragon'></i></span>
     `;
 
     if(verb.reward) {
       li.classList.add('bonus');
+
       list.appendChild(li);
     } else if(verb.critical) {
       li.classList.add('critical');
@@ -115,6 +116,10 @@ document.getElementById('verb-list').addEventListener('click', function(event) {
   Store.removeVerb(event.target.parentElement.nextElementSibling.textContent);                   
 });
 
+// document.getElementById('verb-list').addEventListener('click', function() {
+//   console.log(event.target);
+// });
+
 
 
 //Highlight critical verbs by toggling star classes
@@ -123,16 +128,14 @@ $("ol").on("click", ".star i", function() {
   $(this).parentsUntil("ol").removeClass("bonus");
   // let time = event.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.textContent;
   let time = event.target.parentNode.parentNode.querySelector('.time').textContent;
-  console.log(time);
   var verbs = Store.getVerbs();
   verbs.forEach(function(verb, index) {
     if(verb.time === time) {
-      console.log('yes');
       verb.critical = !verb.critical;
       verb.reward = false;
     }
   });
-	
+	// event.target.parentNode.classList.toggle('getsToggled');
   localStorage.setItem('verbs' , JSON.stringify(verbs));
 
 });
@@ -140,26 +143,43 @@ $("ol").on("click", ".star i", function() {
 //Highlight reward verbs by toggling 
 $("ol").on("click", ".reward i", function() {
 	$(this).parentsUntil("ol").toggleClass("bonus");
-	$(this).parentsUntil("ol").removeClass("critical");
+  $(this).parentsUntil("ol").removeClass("critical");
   let time = event.target.parentNode.parentNode.querySelector('.time').textContent;
-  console.log(time);
   var verbs = Store.getVerbs();
   verbs.forEach(function(verb, index) {
     if(verb.time === time) {
-      console.log('yes');
       verb.reward = !verb.reward;
       verb.critical = false;
     }
   });
+  // event.target.parentNode.classList.toggle('getsToggled');
 	
   localStorage.setItem('verbs' , JSON.stringify(verbs));
 });
-
 
 $(".fa-plus").click(function() {
 	$("input[type='text']").fadeToggle();
   $("input[type='time']").fadeToggle();
   $("button[type='submit']").fadeToggle();
+});
+
+
+$("ol").on("click", ".fa-plus-square", function() {
+  // $(this).parentNode.parentElement.querySelectorAll(".initHidden").toggle(250);
+  hiddens = event.target.parentNode.parentNode.querySelectorAll('.getsToggled');
+  hiddens.forEach(function(icon) {
+    icon.classList.toggle('initHidden');
+  });
+  // event.target.parentNode.classList.add('.initHidden');
+  // console.log(event.target.parentNode);
+});
+
+$("ol").on("click", ".fa-times-circle", function() {
+  // $(this).parentNode.parentElement.querySelectorAll(".initHidden").toggle(250);
+  hiddens = event.target.parentNode.parentNode.querySelectorAll('.getsToggled');
+  hiddens.forEach(function(icon) {
+    icon.classList.toggle('initHidden');
+  });
 });
 
 //functions
