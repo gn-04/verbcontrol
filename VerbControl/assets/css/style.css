@@ -52,9 +52,10 @@ li {
 	color: black;
 	height: 6vh;
 	min-height: 50px;
-	font-size: 20px;
-	font-weight: 500;
+	font-size: 15px;
+	font-weight: 700;
 	border: 1px solid black;
+	justify-items: center;
 }
 
 .reveal i {
