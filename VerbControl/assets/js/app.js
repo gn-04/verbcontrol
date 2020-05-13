@@ -199,13 +199,13 @@ $("ol").on("click", ".edit i", function() {
     document.getElementById('update-form').classList.remove('initHidden');
     document.getElementById('verb-form').classList.add('initHidden');
 
-    // if(document.getElementById('toggleForm').classList.contains('fa-plus-square')) {
-    //   $("input[type='text']").fadeToggle();
-    //   $("input[type='time']").fadeToggle();
-    //   $("button[type='submit']").fadeToggle();
-    //   document.getElementById('toggleForm').classList.toggle('fa-times-circle');
-    //   document.getElementById('toggleForm').classList.toggle('fa-plus-square');
-    // }
+    if(document.getElementById('toggleForm').classList.contains('fa-plus-square')) {
+      $("input[type='text']").fadeToggle();
+      $("input[type='time']").fadeToggle();
+      $("button[type='submit']").fadeToggle();
+      document.getElementById('toggleForm').classList.toggle('fa-times-circle');
+      document.getElementById('toggleForm').classList.toggle('fa-plus-square');
+    }
     let thisVerb = Store.getVerbInfo(time, text);
     localStorage.setItem('tempVerb' , JSON.stringify(thisVerb));
     document.getElementById('updateTime').value = thisVerb.time;
