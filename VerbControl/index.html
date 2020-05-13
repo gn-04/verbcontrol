@@ -26,16 +26,32 @@
 </head>
 <body>
 	<div id="container">
-
+		
 		<form id="verb-form">
-		<h1>Verbs<i class="fas fa-plus"></i></h1>
+		<h1>Verbs<i id="toggleForm" class="getsToggled fa fa-times-circle"></i></h1>
 		<!-- <label for="time">Time</label> -->
 		<!-- id = time-input  -->
 		<input type="time" placeholder="Time" id="time">    
 		<!-- id = text-input  -->
-		<input type="text" placeholder="Enter event..." id="text">
+		<input type="text" placeholder="Enter verb..." id="text">
 		<div>
 			<button type="submit" id="submit">SUBMIT</button>
+    </div>
+	</form>
+	<form id="update-form" class="initHidden">
+		<h1>Edit Verb</h1>
+		<!-- <label for="time">Time</label> -->
+		<!-- id = time-input  -->
+		<input type="time" placeholder="Time" id="updateTime">    
+		<!-- id = text-input  -->
+		<input type="text" placeholder="Edit verb..." id="updateText">
+		<!-- <div class="alwaysHidden"id="bonusBool"></div>
+		<div class="alwaysHidden"id="criticalBool"></div>
+		<div class="alwaysHidden"id="timeDiv"></div>
+		<div class="alwaysHidden"id="textDiv"></div> -->
+		<div class="alwaysHidden"id="updateButtonDiv">
+			<button id="cancelUpdate">CANCEL</button>
+			<button type="submit" id="update">UPDATE</button>
     </div>
 	</form>
 		
