@@ -1,8 +1,5 @@
 body {
 	font-family: Roboto;
-	/*background: #00bf8f;  /* fallback for old browsers */
-	/*background: -webkit-linear-gradient(to bottom, #001510, #00bf8f);  /* Chrome 10-25, Safari 5.1-6 */
-	/*background: linear-gradient(to bottom, #001510, #00bf8f); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 	height: 100%;
 	width: 100%;
 		margin: 0;
@@ -101,12 +98,7 @@ li {
 	margin: 0;
 	padding-left: 5px;
 	border: 1px solid black;
-	/* border-top-left-radius: 10px;
-	border-top-right-radius: 10px; */
-	/* border: 1px solid black; */
-	/* border-top: 5px solid black;
-	border-right: 5px solid black;
-	border-left: 5px solid black; */
+	
 }
 
 .liDiv {
@@ -115,7 +107,7 @@ li {
 }
 
 .inFocus {
-	/* background-color: black; */
+	
 	padding: 0;
 	margin: 0;
 	border-bottom: 3px solid black;
@@ -134,21 +126,8 @@ li {
 	font-weight: 700;
 	text-align: center;
 	border-top: none;
-	/* border-bottom: 5px solid black; */
-	/* border-right: 5px solid black;
-	border-left: 5px solid black; */
 	
-	/* border-radius: 20px; */
 }
-
-/* .criticalDrawer {
-	border-color: #a155e7;
-}
-
-
-.bonusDrawer {
-	border-color: #00bf8f;
-} */
 
 .reveal i {
 	float: right;
@@ -166,18 +145,11 @@ li {
 	text-align: center;
 	line-height: 5vh;
 	position: relative;
-  /* Adjust these values accordingly */
-  top: 5px;
-  left: -5px;
+        top: 5px;
+        left: -5px;
 	width: 40px;
-	/* transition: 0.2s linear;
-	opacity: 0 */
+	
 }
-
-/* .done i:active, .reveal i:active {
-	color: #10cdee;
-} */
-
 
 .edit i {
 	line-height: 6vh;
@@ -188,9 +160,7 @@ li {
 	color: rgb(42, 210, 240);
 	width: 40px; 
 	position: relative;
-  /* Adjust these values accordingly */
-  top: 5px;
-	/* left: 5px; */
+        top: 5px;
 	margin: auto;
 }
 
@@ -203,13 +173,8 @@ li {
 	color: rgb(219, 50, 50);
 	width: 40px; 
 	position: relative;
-  /* Adjust these values accordingly */
-  top: 5px;
-	/* left: 5px; */
+        top: 5px;
 	margin: auto;
-	/* transition: 0.2s linear; */
-	/* opacity: 0; */
-	/* border: 1px solid black; */
 }
 
 
@@ -217,18 +182,12 @@ li {
 .liHidden .reward i {
 	
 	color: #00bf8f;
-	/*color: #9a2bef;*/
 	text-align: center;
 	line-height: 5vh;
 	position: relative;
-  /* Adjust these values accordingly */
-  top: 5px;
-	/* left: 5px; */
+	top: 5px;
 	width: 40px;
 	margin:auto;
-	/* width: 0;
-	transition: 0.2s linear;
-	opacity: 0; */
 }
 
 .liHidden .star i {
@@ -237,20 +196,10 @@ li {
 	text-align: center;
 	line-height: 5vh;
 	position: relative;
-  /* Adjust these values accordingly */
-  top: 5px;
-	/* left: 5px; */
+        top: 5px;
 	margin: auto;
 	width: 40px;
-	/* width: 0;
-	transition: 0.2s linear;
-	opacity: 0; */
 }
-
-/* li:hover .trash, li:hover .star i, li:hover .reward i, li:hover .done i {
-	width: 40px;
-	opacity: 1.0;
-} */
 
 .initHidden {
 	display: none;
@@ -321,8 +270,7 @@ input:focus{
 	float: right;
 	line-height: 5vh;
 	position: relative;
-  /* Adjust these values accordingly */
-  top: 6px;
+	top: 6px;
 	left: 2px;
 	width: 40px;
 	display: block;
@@ -331,9 +279,7 @@ input:focus{
 
 #container {
 	width: 100vw;
-	/*margin: 300px auto;*/
 	background-color: black;
-	/* box-shadow: 0 0 3px rgba(0, 0, 0, 0.1); */
 	border-bottom: white solid 1px;
 }
 
