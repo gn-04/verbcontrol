@@ -70,7 +70,7 @@ h1 {
 	font-size: 20px;
 }
 
-#cancelUpdate {
+#cancel-update {
 	background-color: black;
 	border: 2px solid white;
 	border-radius: 5px;
@@ -106,8 +106,7 @@ li {
 	margin: 0;
 }
 
-.inFocus {
-	
+.openDrawer {
 	padding: 0;
 	margin: 0;
 	border-bottom: 3px solid black;
@@ -151,7 +150,7 @@ li {
 	
 }
 
-.edit i {
+.edit {
 	line-height: 6vh;
 	height: 6vh;
 	min-height: 49px;
@@ -164,7 +163,7 @@ li {
 	margin: auto;
 }
 
-.trash i {
+.delete {
 	line-height: 6vh;
 	height: 6vh;
 	min-height: 49px;
@@ -179,7 +178,7 @@ li {
 
 
 
-.liHidden .reward i {
+.liHidden .reward {
 	
 	color: #00bf8f;
 	text-align: center;
@@ -190,7 +189,7 @@ li {
 	margin:auto;
 }
 
-.liHidden .star i {
+.liHidden .challenge {
 	
 	color: #a155e7;
 	text-align: center;
@@ -282,7 +281,6 @@ input:focus{
 	background-color: black;
 	border-bottom: white solid 1px;
 }
-
 
 
 
