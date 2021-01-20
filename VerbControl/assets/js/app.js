@@ -1,4 +1,7 @@
 const submitBtn = document.getElementById('submit');
+const timeInput = document.getElementById('time-input');
+const textInput = document.getElementById('text-input');
+const verbList = document.getElementById('verb-list');
 
 
 class Verb {
@@ -25,8 +28,7 @@ class Store {
 
   static displayVerbs() {
     const verbs = Store.getVerbs();
-    const list = document.getElementById('verb-list');
-    list.textContent = '';
+    verbList.textContent = '';
 
     verbs.forEach(function(verb)  {
     // Create row element
@@ -42,7 +44,7 @@ class Store {
     <span class="time">${verb.time}</span> <span class="text">${verb.text}</span><span class="reveal getsToggled"><i class="far fa-plus-square"></i></span><span class="done initHidden getsToggled"><i class="far fa-times-circle"></i></span><span class='criticalIcon'><i class='fas fa-dragon'></i></span><span class='bonusIcon'><i class='far fa-gem'></i></span>
     `;
 
-    liHidden.innerHTML = `<span class='trash'><i class="delete fas fa-trash"></i></span><span class="edit"><i class="fas fa-wrench"></i></span><span class='star'><i class='fas fa-dragon'></i></span><span class='reward'><i class='far fa-gem'></i></span>`;
+    liHidden.innerHTML = `<span><i class="delete fas fa-trash"></i></span><span><i class="edit fas fa-wrench"></i></span><span><i class='challenge fas fa-dragon'></i></span><span><i class='reward far fa-gem'></i></span>`;
 
     liDiv.insertAdjacentElement("afterbegin", li);
     liDiv.insertAdjacentElement("beforeend", liHidden);
@@ -50,18 +52,11 @@ class Store {
 
     if(verb.reward === true) {
       li.classList.add('bonus');
-      
-      list.appendChild(liDiv);
-      // list.appendChild(liHidden);
     } else if(verb.critical === true) {
       li.classList.add('critical');
-      
-      list.appendChild(liDiv);
-      // list.appendChild(liHidden);
-    } else {
-      list.appendChild(liDiv);
-      // list.appendChild(liHidden);
-    }
+    } 
+
+    verbList.appendChild(liDiv);
     
     });
     
@@ -109,17 +104,20 @@ class Store {
   }
 }
 
-$("input[type='time']").keypress(function(event) {
-	if(event.which === 13){
-			$(this).next('input').focus(); 
-	}
+timeInput.addEventListener('keypress', function (event) {
+  if (event.key === 'Enter') {
+    this.nextElementSibling.focus();
+    event.preventDefault();
+  }
+  
 });
+
 
 document.addEventListener('DOMContentLoaded', Store.displayVerbs());
 
 document.getElementById('verb-form').addEventListener('submit', function(event) {
-  let time = document.getElementById('time').value;
-  let text = document.getElementById('text').value;
+  let time = timeInput.value;
+  let text = textInput.value;
 
   if ( time === '' || text === '') {
     showAlert("Please enter a value for all fields" ,  "error");
@@ -136,15 +134,14 @@ document.getElementById('verb-form').addEventListener('submit', function(event) 
 
     document.getElementById('time').focus();
    
-    // showAlert("Verb Added!" , 'success');
   }
 
   event.preventDefault();
 });
 
 document.getElementById('update-form').addEventListener('submit', function(event) {
-  let time = document.getElementById('updateTime').value;
-  let text = document.getElementById('updateText').value;
+  let time = document.getElementById('update-time').value;
+  let text = document.getElementById('update-text').value;
 
     newVerb = new Verb(time, text);
     let oldVerb = JSON.parse(localStorage.getItem('tempVerb'));
@@ -163,15 +160,14 @@ document.getElementById('update-form').addEventListener('submit', function(event
     document.getElementById('verb-form').classList.remove('initHidden');
     localStorage.removeItem('tempVerb');
 
-    document.getElementById('time').focus();
+    timeInput.focus();
    
-    // showAlert("Verb Added!" , 'success');
 
   event.preventDefault();
 });
 
 
-document.getElementById('cancelUpdate').addEventListener('click', function(event) {
+document.getElementById('cancel-update').addEventListener('click', function(event) {
     clearUpdateForm();
     document.getElementById('update-form').classList.add('initHidden');
     document.getElementById('verb-form').classList.remove('initHidden');
@@ -179,21 +175,18 @@ document.getElementById('cancelUpdate').addEventListener('click', function(event
     event.preventDefault();
 });
 
-
-$("ol").on("click", ".trash i", function() {
-    // console.log(event.target.parentElement.parentElement.previousSibling);
-    // Store.removeVerb(event.target.parentElement.parentElement.previousSibling.firstChild.textContent);
+verbList.addEventListener('click', (event) => {
+  if(event.target.classList.contains('delete')) {
     let time = event.target.parentElement.parentElement.previousSibling.querySelector('.time').textContent;
-    let text = event.target.parentElement.parentElement.previousSibling.querySelector('.text').textContent
+    let text = event.target.parentElement.parentElement.previousSibling.querySelector('.text').textContent;
     Store.removeVerb(time, text);
     deleteVerb(event.target);
-    // document.querySelector("#verb-list > li:nth-child(1) > span.time")
+    event.preventDefault();
+  }
 });
 
-
-$("ol").on("click", ".edit i", function() {
-    // console.log(event.target.parentElement.parentElement.previousSibling);
-    // Store.removeVerb(event.target.parentElement.parentElement.previousSibling.firstChild.textContent);
+verbList.addEventListener('click', (event) => {
+  if(event.target.classList.contains('edit')) {
     let time = event.target.parentElement.parentElement.previousSibling.querySelector('.time').textContent;
     let text = event.target.parentElement.parentElement.previousSibling.querySelector('.text').textContent;
     document.getElementById('update-form').classList.remove('initHidden');
@@ -208,44 +201,74 @@ $("ol").on("click", ".edit i", function() {
     }
     let thisVerb = Store.getVerbInfo(time, text);
     localStorage.setItem('tempVerb' , JSON.stringify(thisVerb));
-    document.getElementById('updateTime').value = thisVerb.time;
-    document.getElementById('updateText').value = thisVerb.text;
+    document.getElementById('update-time').value = thisVerb.time;
+    document.getElementById('update-text').value = thisVerb.text;
+  }
 });
 
-//Highlight critical verbs by toggling star classes
-$("ol").on("click", ".star i", function() {
-	event.target.parentNode.parentNode.previousSibling.classList.toggle("critical"); 
-	event.target.parentNode.parentNode.previousSibling.classList.remove("bonus"); 
-  // let time = event.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.textContent;
-  let time = event.target.parentNode.parentNode.previousSibling.querySelector('.time').textContent;
-  let text = event.target.parentNode.parentNode.previousSibling.querySelector('.text').textContent;
-  var verbs = Store.getVerbs();
-  verbs.forEach(function(verb, index) {
-    if(verb.time === time && verb.text === text) {
-      verb.critical = !verb.critical;
-      verb.reward = false;
-    }
-  });
-  localStorage.setItem('verbs' , JSON.stringify(verbs));
 
+//highlight and assign challenge
+verbList.addEventListener('click', (event) => {
+  if(event.target.classList.contains('challenge')) {
+    event.target.parentNode.parentNode.previousSibling.classList.toggle("critical"); 
+    event.target.parentNode.parentNode.previousSibling.classList.remove("bonus"); 
+    let time = event.target.parentNode.parentNode.previousSibling.querySelector('.time').textContent;
+    let text = event.target.parentNode.parentNode.previousSibling.querySelector('.text').textContent;
+    var verbs = Store.getVerbs();
+    verbs.forEach(function(verb, index) {
+      if(verb.time === time && verb.text === text) {
+        verb.critical = !verb.critical;
+        verb.reward = false;
+      }
+    });
+    localStorage.setItem('verbs' , JSON.stringify(verbs));
+  }
 });
 
-//Highlight reward verbs by toggling 
-$("ol").on("click", ".reward i", function() {
-	event.target.parentNode.parentNode.previousSibling.classList.toggle("bonus"); 
-	event.target.parentNode.parentNode.previousSibling.classList.remove("critical");
-  let time = event.target.parentNode.parentNode.previousSibling.querySelector('.time').textContent;
-  let text = event.target.parentNode.parentNode.previousSibling.querySelector('.text').textContent;
-  var verbs = Store.getVerbs();
-  verbs.forEach(function(verb, index) {
-    if(verb.time === time && verb.text === text) {
-      verb.reward = !verb.reward;
-      verb.critical = false;
-    }
-  });
-  // event.target.parentNode.classList.toggle('getsToggled');
+
+//highlight rewards
+verbList.addEventListener('click', (event) => {
+  if(event.target.classList.contains('reward')) {
+    event.target.parentNode.parentNode.previousSibling.classList.toggle("bonus"); 
+    event.target.parentNode.parentNode.previousSibling.classList.remove("critical");
+    let time = event.target.parentNode.parentNode.previousSibling.querySelector('.time').textContent;
+    let text = event.target.parentNode.parentNode.previousSibling.querySelector('.text').textContent;
+    var verbs = Store.getVerbs();
+    verbs.forEach(function(verb, index) {
+      if(verb.time === time && verb.text === text) {
+        verb.reward = !verb.reward;
+        verb.critical = false;
+      }
+    });
 	
   localStorage.setItem('verbs' , JSON.stringify(verbs));
+  }
+});
+
+//open drawer
+verbList.addEventListener('click', (event) => {
+  if(event.target.classList.contains('fa-plus-square')) {
+    event.target.parentNode.parentNode.nextSibling.classList.toggle('initHidden');
+    event.target.parentNode.parentNode.parentNode.classList.toggle('openDrawer');
+    
+    getsToggled = event.target.parentNode.parentNode.querySelectorAll('.getsToggled');
+    
+    getsToggled.forEach(function(icon) {
+      icon.classList.toggle('initHidden');
+    });
+  }
+});
+
+//close drawer
+verbList.addEventListener('click', (event) => {
+  if(event.target.classList.contains('fa-times-circle')) {
+    event.target.parentNode.parentNode.nextSibling.classList.toggle('initHidden');
+    event.target.parentNode.parentNode.parentNode.classList.toggle('openDrawer');
+    hiddens = event.target.parentNode.parentNode.querySelectorAll('.getsToggled');
+    hiddens.forEach(function(icon) {
+    icon.classList.toggle('initHidden');
+  });
+  }
 });
 
 $("#toggleForm").click(function() {
@@ -255,44 +278,6 @@ $("#toggleForm").click(function() {
   this.classList.toggle('fa-times-circle');
   this.classList.toggle('fa-plus-square');
 });
-
-
-// document.getElementById('closeForm').addEventListener('click', function() {
-
-// });
-
-
-$("ol").on("click", ".fa-plus-square", function() {
-  
-  event.target.parentNode.parentNode.nextSibling.classList.toggle('initHidden');
-  event.target.parentNode.parentNode.parentNode.classList.toggle('inFocus');
-  
-  getsToggled = event.target.parentNode.parentNode.querySelectorAll('.getsToggled');
-  
-  
-  // getsToggled.forEach(function(icon) {
-  //   icon.classList.toggle('initHidden');
-  // });
-  getsToggled.forEach(function(icon) {
-    icon.classList.toggle('initHidden');
-  });
-  // event.target.parentNode.classList.add('.initHidden');
-  // console.log(event.target.parentNode);
-});
-
-$("ol").on("click", ".fa-times-circle", function() {
-  // $(this).parentNode.parentElement.querySelectorAll(".initHidden").toggle(250);
-  event.target.parentNode.parentNode.nextSibling.classList.toggle('initHidden');
-  event.target.parentNode.parentNode.parentNode.classList.toggle('inFocus');
-  hiddens = event.target.parentNode.parentNode.querySelectorAll('.getsToggled');
-  hiddens.forEach(function(icon) {
-    icon.classList.toggle('initHidden');
-  });
-});
-
-//functions
-
-
 
 
 function showAlert(message, className) {
@@ -327,7 +312,6 @@ function deleteVerb(target) {
   if(target.classList.contains("delete")) {
     target.parentElement.parentElement.previousSibling.remove();
     target.parentElement.parentElement.parentElement.remove();
-    // showAlert("Verb Deleted!", "success");
   }
 }
 
