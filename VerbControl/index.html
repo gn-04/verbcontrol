@@ -5,9 +5,6 @@
 	<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<!-- Bootstrap -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-    crossorigin="anonymous">
 
 	<!-- todo.css -->
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
@@ -27,30 +24,23 @@
 <body>
 	<div id="container">
 		
-		<form id="verb-form">
+	<form id="verb-form">
 		<h1>Verbs<i id="toggleForm" class="getsToggled fa fa-times-circle"></i></h1>
-		<!-- <label for="time">Time</label> -->
-		<!-- id = time-input  -->
-		<input type="time" placeholder="Time" id="time">    
-		<!-- id = text-input  -->
-		<input type="text" placeholder="Enter verb..." id="text">
+		<input type="time" placeholder="Time" id="time-input">    
+		<input type="text" placeholder="Enter verb..." id="text-input">
 		<div>
 			<button type="submit" id="submit">SUBMIT</button>
     </div>
 	</form>
 	<form id="update-form" class="initHidden">
 		<h1>Edit Verb</h1>
-		<!-- <label for="time">Time</label> -->
-		<!-- id = time-input  -->
-		<input type="time" placeholder="Time" id="updateTime">    
-		<!-- id = text-input  -->
-		<input type="text" placeholder="Edit verb..." id="updateText">
-		<!-- <div class="alwaysHidden"id="bonusBool"></div>
-		<div class="alwaysHidden"id="criticalBool"></div>
-		<div class="alwaysHidden"id="timeDiv"></div>
-		<div class="alwaysHidden"id="textDiv"></div> -->
+	
+		<input type="time" placeholder="Time" id="update-time">    
+		
+		<input type="text" placeholder="Edit verb..." id="update-text">
+		
 		<div id="updateButtonDiv">
-			<button id="cancelUpdate">CANCEL</button>
+			<button id="cancel-update">CANCEL</button>
 			<button type="submit" id="update">UPDATE</button>
     </div>
 	</form>
